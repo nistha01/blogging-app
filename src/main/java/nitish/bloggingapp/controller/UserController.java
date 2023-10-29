@@ -70,14 +70,21 @@ public class UserController {
     public String commentOnPost(@RequestParam String email, @RequestParam String tokenValue, @PathVariable Long postId, @RequestBody String commentBody) {
         return userService.commnetOnPost(email, tokenValue, commentBody, postId);
     }
+    //delete comment
     @DeleteMapping("comment/post/{postId}")
     public String deleteComment(@RequestParam String email, @RequestParam String tokenValue, @PathVariable Long commentId){
         return userService.removeComment(email,tokenValue,commentId);
 
     }
+    //update post caption
     @PutMapping("update/post/{postId}")
     public String updatePostDetails(@RequestParam String email, @RequestParam String tokenValue,@PathVariable Long postId,@RequestBody String updation){
         return userService.updatePostInfo(email,tokenValue,postId,updation);
+    }
+    //Api to delete a post
+    @DeleteMapping("post")
+    public String deletePost(@RequestParam String email, @RequestParam String tokenValue, @PathVariable Long postId){
+        return userService.deletePost(email,tokenValue,postId);
     }
 
 

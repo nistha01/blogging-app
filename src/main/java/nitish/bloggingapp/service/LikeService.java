@@ -46,4 +46,9 @@ public class LikeService {
         return String.valueOf(likes.size());
 
     }
+
+    public void clearLikesByPost(Post post) {
+        List<Likee> allLikes=likeRepo.findByBlogPost(post);
+        likeRepo.deleteAll(allLikes);
+    }
 }

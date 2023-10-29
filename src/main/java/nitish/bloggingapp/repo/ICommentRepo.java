@@ -9,5 +9,5 @@ import java.util.List;
 public interface ICommentRepo extends JpaRepository<Comment,Long> {
 
 
-
+    List<Comment> findByBlogPost(Post deltPost);
 }

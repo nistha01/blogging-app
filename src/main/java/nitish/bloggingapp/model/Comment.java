@@ -21,7 +21,7 @@ public class Comment {
     private LocalDateTime commentCreationTimeStamp;
     @ManyToOne
     @JoinColumn(name = "fk_post_id")
-    private Post instaPost;
+    private Post blogPost;
 
     @ManyToOne
     @JoinColumn(name = "fk_commenter_id")

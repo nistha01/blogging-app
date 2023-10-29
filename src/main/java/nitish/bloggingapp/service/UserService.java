@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class UserService {
@@ -212,7 +211,7 @@ public class UserService {
             Comment dltComment = commentService.findCommnetById(commentId);
 
             //find the post
-            Post currPost = dltComment.getInstaPost();
+            Post currPost = dltComment.getBlogPost();
             //check id the post and the user belongs to  same user or not?
             if (authorizedChanger(email, currPost, dltComment)) {
                 commentService.removeCommentById(commentId);
@@ -240,31 +239,53 @@ public class UserService {
     }
 
 
-    public String updatePostInfo(String email, String tokenValue, Long postId,String updation) {
+    public String updatePostInfo(String email, String tokenValue, Long postId, String updation) {
         //authenticate for user is valid or not
-        if(authenticationService.authenticate(email,tokenValue)){
+        if (authenticationService.authenticate(email, tokenValue)) {
 
             //get post
-            Post currPost=postService.getPost(postId);
+            Post currPost = postService.getPost(postId);
             //get user by email
-            User currUser=userRepo.findFirstByUserEmail(email);
-            String currEmail=currUser.getUserEmail();
+            User currUser = userRepo.findFirstByUserEmail(email);
+            String currEmail = currUser.getUserEmail();
 
             //check user of passed email and user of post matches or not
-            if(currPost.getPostOwner().getUserEmail().equals(currEmail)){
+            if (currPost.getPostOwner().getUserEmail().equals(currEmail)) {
                 currPost.setPostCaption(updation);
                 postService.postRepo.save(currPost);
                 return "details updated";
 
-            }
-            else{
+            } else {
                 return " u are a user but not owner of this post";
             }
 
 
-        }
-        else{
+        } else {
             return "not a correct user";
+        }
+    }
+
+    public String deletePost(String email, String tokenValue, Long postId) {
+        //verify if this user is registered or not ?
+        if (authenticationService.authenticate(email, tokenValue)) {
+
+            //check if the post user and deleting user is same or not
+            Post blogPost =  postService.getPostById(postId);
+            String  postOwnerEmail =  blogPost.getPostOwner().getUserEmail();
+
+            if(email.equals(postOwnerEmail)){
+
+                return  postService.deletePost(postId);
+            }
+            else{
+                return "not a right person to delete post!!";
+            }
+
+
+
+
+        } else {
+            return "not a valid user register first";
         }
     }
 }

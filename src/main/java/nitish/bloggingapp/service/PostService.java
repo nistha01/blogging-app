@@ -16,6 +16,10 @@ import java.util.List;
 public class PostService {
     @Autowired
     IPostRepo postRepo;
+    @Autowired
+    LikeService likeService;
+    @Autowired
+    CommentService commentService;
 
     @Autowired
     AuthenticationService authenticationService;
@@ -37,6 +41,21 @@ public class PostService {
 
     public Post getPost(Long postId) {
         return postRepo.findById(postId).orElse(null);
+    }
+
+    @Transactional
+    public String deletePost(Long postId) {
+        //find the post
+        Post deltPost=postRepo.findById(postId).orElse(null);
+        //delete all likes
+        likeService.clearLikesByPost(deltPost);
+
+        //delete all comments
+        commentService.deleteAllComments(deltPost);
+        //delete the post
+        postRepo.deleteById(postId);
+        return "post deleted successfully";
+
     }
 }
 

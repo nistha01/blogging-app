@@ -24,4 +24,10 @@ public class CommentService {
     public void removeCommentById(Long commentId) {
         commentRepo.deleteById(commentId);
     }
+
+
+    public void deleteAllComments(Post deltPost) {
+        List<Comment> allComments=commentRepo.findByBlogPost(deltPost);
+        commentRepo.deleteAll(allComments);
+    }
 }

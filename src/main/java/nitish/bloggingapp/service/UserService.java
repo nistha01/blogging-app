@@ -19,6 +19,8 @@ public class UserService {
     LikeService likeService;
     @Autowired
     CommentService commentService;
+    @Autowired
+    FollowService followService;
 
     @Autowired
     AuthenticationService authenticationService;
@@ -287,6 +289,37 @@ public class UserService {
         } else {
             return "not a valid user register first";
         }
+    }
+
+    public String followTarget(String email, String tokenValue, Long targetUserId) {
+
+        if(authenticationService.authenticate(email,tokenValue)){
+            //find both user
+            User follower = userRepo.findFirstByUserEmail(email);
+            User target = userRepo.findById(targetUserId).orElseThrow();
+            if(authorizeToFollow(follower,target)){
+                followService.startFollowing(follower,target);
+                return follower.getUserHandle() + " started following " + target.getUserHandle();
+
+
+            }
+            else{
+                return "not authorised to follow";
+            }
+
+
+        }
+        else{
+            return "Un Authenticated access!!!";
+        }
+    }
+
+    private boolean authorizeToFollow(User follower, User target) {
+        //check if already follows or not
+
+        boolean followingExist =  followService.findByTargetAndFollower(follower,target);
+
+        return !followingExist && !follower.equals(target);
     }
 }
 

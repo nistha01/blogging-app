@@ -86,6 +86,12 @@ public class UserController {
     public String deletePost(@RequestParam String email, @RequestParam String tokenValue, @PathVariable Long postId){
         return userService.deletePost(email,tokenValue,postId);
     }
+    //follow api
+    @PostMapping("follow/user/{targetUserId}")
+    public String followTarget(@RequestParam String email, @RequestParam String tokenValue, @PathVariable Long targetUserId){
+        return userService.followTarget(email,tokenValue,targetUserId);
+    }
+
 
 
 

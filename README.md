@@ -1,18 +1,20 @@
-# My API Project
+# API Documentation
 
-Welcome to the documentation for my API project. This project provides various API endpoints for user management, blog posting, commenting, liking posts, and more.
+Welcome to the documentation for the API, which provides endpoints for user management, blog posting, liking posts, following users, commenting, and more. This document outlines the available API endpoints and describes the data models used in the project.
 
 ## Table of Contents
-- [Overview](#overview)
 - [API Endpoints](#api-endpoints)
+- [Data Models](#data-models)
+  - [AuthenticationToken](#authenticationtoken)
+  - [User](#user)
+  - [Post](#post)
+  - [Like](#like)
+  - [Follow](#follow)
+  - [Comment](#comment)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Overview
-
-This API project is designed to facilitate user actions such as signing up, signing in, posting blogs, commenting on posts, and interacting with blog posts through liking, unliking, and more. It aims to provide a complete user and content management system.
 
 ## API Endpoints
 
@@ -70,22 +72,90 @@ The following is a list of available API endpoints and their descriptions:
     - **Endpoint:** `POST /follow/user/{targetUserId}`
     - **Description:** Allows a user to follow another user.
 
-## Getting Started
+## Data Models
 
-To get started with this API, you will need to set up your development environment and configure the necessary dependencies.
+### AuthenticationToken
+- **Fields:**
+  - `tokenId` (Auto-generated)
+  - `tokenValue` (string)
+  - `tokenCreationDateTime` (timestamp)
+  - `user` (User)
+- **Description:** Represents an authentication token associated with a user session. The fields include:
+  - `tokenId`: Automatically generated unique identifier for the token.
+  - `tokenValue`: The value of the authentication token.
+  - `tokenCreationDateTime`: The timestamp when the token was created.
+  - `user`: The user associated with the token.
 
-- Clone the repository: `git clone (https://github.com/nistha01/blogging-app)`
-- Install dependencies: `install dependency`
+### User
+- **Fields:**
+  - `userId` (Auto-generated)
+  - `userName` (string, required)
+  - `userHandle` (string, required)
+  - `userBio` (string)
+  - `userEmail` (string, email)
+  - `userPassword` (string)
+  - `gender` (enum)
+  - `accountType` (enum)
+  - `blueTick` (boolean)
+- **Description:** Represents a user in the system. The fields include:
+  - `userId`: Automatically generated unique identifier for the user.
+  - `userName`: The user's full name.
+  - `userHandle`: A unique user handle or username.
+  - `userBio`: A brief bio or description of the user.
+  - `userEmail`: The user's email address, validated as an email.
+  - `userPassword`: The user's password.
+  - `gender`: The gender of the user, represented as an enum.
+  - `accountType`: The type of user account, represented as an enum.
+  - `blueTick`: A boolean indicating whether the user has a blue verification tick.
 
-## Usage
+### Post
+- **Fields:**
+  - `postId` (Auto-generated)
+  - `postContent` (string)
+  - `postCaption` (string)
+  - `postLocation` (string)
+  - `postType` (enum)
+  - `postCreatedTimeStamp` (timestamp)
+  - `postOwner` (User)
+- **Description:** Represents a blog post created by a user. The fields include:
+  - `postId`: Automatically generated unique identifier for the post.
+  - `postContent`: The content of the blog post.
+  - `postCaption`: A brief caption or description for the post.
+  - `postLocation`: The location associated with the post.
+  - `postType`: The type of the post, represented as an enum.
+  - `postCreatedTimeStamp`: The timestamp when the post was created.
+  - `postOwner`: The user who owns the post.
 
-You can use the API endpoints by making HTTP requests to the specified URLs. Each endpoint has specific requirements for request parameters and request bodies. Detailed examples can be found in the code or documentation.
+### Like
+- **Fields:**
+  - `likeId` (Auto-generated)
+  - `blogPost` (Post)
+  - `liker` (User)
+- **Description:** Represents a like action on a post by a user. The fields include:
+  - `likeId`: Automatically generated unique identifier for the like action.
+  - `blogPost`: The post that was liked.
+  - `liker`: The user who liked the post.
 
-## Contributing
+### Comment
+- **Fields:**
+  - `commentId` (Auto-generated)
+  - `commentBody` (string, required)
+  - `commentCreationTimeStamp` (timestamp)
+  - `blogPost` (Post)
+  - `commenter` (User)
+- **Description:** Represents a comment posted by a user on a blog post. The fields include:
+  - `commentId`: Automatically generated unique identifier for the comment.
+  - `commentBody`: The content of the comment.
+  - `commentCreationTimeStamp`: The timestamp when the comment was created.
+  - `blogPost`: The post on which the comment is posted.
+  - `commenter`: The user who posted the comment.
 
-Contributions to this project are welcome. If you would like to report issues, suggest improvements, or submit pull requests, please follow the guidelines in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
-
-## License
-
-This project is licensed under the [License Name]. See the [LICENSE.md](LICENSE.md) file for more details.
+### Follow
+- **Fields:**
+  - `followId` (Auto-generated)
+  - `currentUser` (User)
+  - `currentUserFollower` (User)
+- **Description:** Represents a follower-following relationship between users. The fields include:
+  - `followId`: Automatically generated unique identifier for the follow relationship.
+  - `currentUser`:
 

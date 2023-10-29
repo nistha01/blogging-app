@@ -3,7 +3,7 @@
 Welcome to the documentation for the API, which provides endpoints for user management, blog posting, liking posts, following users, commenting, and more. This document outlines the available API endpoints and describes the data models used in the project.
 
 ## Table of Contents
-- [API Endpoints](#api-endpoints)
+- [API Endpoints](#api-endpoints) 
 - [Data Models](#data-models)
   - [AuthenticationToken](#authenticationtoken)
   - [User](#user)

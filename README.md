@@ -1,3 +1,52 @@
+# <p align ="center">  Blogging-application </p>
+
+<p align="center">
+<a href="Java url">
+    <img alt="Java" src="https://img.shields.io/badge/Java-17-purple.svg" />
+</a>
+<a href="Maven url" >
+    <img alt="Maven" src="https://img.shields.io/badge/maven-3.0.5-blue.svg" />
+</a>
+<a href="Spring Boot url" >
+    <img alt="Spring Boot" src="https://img.shields.io/badge/Spring Boot-3.1.5-yellow.svg" />
+</p>
+
+
+## Overview
+SpringBlogX is a versatile and user-friendly platform designed for bloggers and content creators of all levels. With a focus on simplicity, robust features, and a stunning user experience, our application empowers users to share their thoughts, stories, and expertise with the world.
+
+## Frameworks And Languages:
+The blogging apllication project is developed using the following frameworks and languages:
+
+- Spring Boot: A Java-based framework for building web applications.
+- Spring MVC: A module of the Spring Framework that supports building web applications.
+- Java: The programming language used for backend development.
+- Hibernate: An Object-Relational Mapping (ORM) framework used for database interactions.
+- MySQL: The chosen database management system.
+
+## Dependencies Used :
+The dependencies used in the pom.xml file for this project are :
+
+- Spring Starter Web: Provides essential web-related features and configurations.
+- Spring JPA: Simplifies working with relational databases using Java Persistence API (JPA).
+- Lombok: Reduces boilerplate code with annotations for getter, setter, and other common methods.
+- Validation: Enables data validation using annotations.
+- MySQL Driver: The chosen database management system for data storage.
+- Swagger: To generate interactive API (documentation).
+
+## Features
+
+### User Management
+
+1. **Sign Up:**
+   - Users can register for an account with their information, including email and password.
+   - It validates admin email addresses ending with "admin.com."
+
+2. **Sign In:**
+   - Registered users can sign in with their email and password, generating a unique token for authentication.
+
+3. **Sign Out:**
+   - Users can log out, which invalidates their token for security.
 # API Documentation
 
 Welcome to the documentation for the API, which provides endpoints for user management, blog posting, liking posts, following users, commenting, and more. This document outlines the available API endpoints and describes the data models used in the project.
@@ -158,4 +207,32 @@ The following is a list of available API endpoints and their descriptions:
 - **Description:** Represents a follower-following relationship between users. The fields include:
   - `followId`: Automatically generated unique identifier for the follow relationship.
   - `currentUser`:
+ 
+    ## Database Design:
+
+The project uses MySQL as the database management system. To design the database for the post of the user, we need to consider the entities (tables) and their relationships. Based on the features and models mentioned in this file.
+    
+### Relationships:
+
+- Each User can have multiple posts.
+- Each posts can have multiple likes and comment.
+- Each User can have like and comment other's post. But the post owner can edit or update the post.
+- Each user can follow other user.
+
+## Data Structure:
+
+The project utilizes several data structures, including:
+
+* Strings: Used for storing text-based data, such as user names, email addresses, phone numbers, post types, caption , post description and authentication tokens.
+* Long: Used for storing numerical data, such as IDs.
+* LocalDate: Used for storing date information, including token creation dates.
+* ArrayList: To organize and manage data efficiently, such as lists of user,comment,like and followers.
+
+## Deployment using AWS
+Once developed and tested the music streaming app locally, next deployed it to a cloud platform like AWS (Amazon Web Services) to make it accessible to users worldwide. AWS provides a robust and scalable infrastructure to host web applications, making it a popular choice for deploying Spring Boot applications.
+
+**Deployment Link** : [[http://65.2.150.67:8080/swagger-ui/index.html#/](http://3.110.188.154:8081/swagger-ui/index.html#/))
+
+## Project Summary:
+Blogging-application is a feature-rich and modern blogging platform built on the Spring Boot framework. This platform provides users with a seamless and interactive experience for creating, sharing, and engaging with blog posts. Key features and functionality include:User Registration and Authentication,Content CreationUser Management. And deployed the project using AWS(Amazon Web Service).
 
